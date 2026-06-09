@@ -271,7 +271,6 @@ nav{
   transition:border-color .3s,transform .3s;
 }
 .marquee-img:hover{border-color:rgba(0,229,255,.4);transform:scale(1.02)}
-/* placeholder shown when you haven't added a real image yet */
 .marquee-ph{
   width:400px;height:260px;flex-shrink:0;
   border-radius:18px;
@@ -490,6 +489,89 @@ nav{
 .ach-card h3{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
 .ach-card p{font-size:.8rem;color:rgba(215,226,234,.5);line-height:1.6;font-weight:300}
 
+/* ============================================================
+   3D EXPERIENCE SECTION
+   ============================================================ */
+#experience3d{
+  background:var(--bg);
+  padding:5rem 3rem;
+  position:relative;
+  z-index:2;
+  border-top:1px solid var(--border);
+}
+.exp3d-inner{max-width:1100px;margin:0 auto}
+.exp3d-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;
+}
+.exp3d-desc{
+  font-size:clamp(.82rem,1.3vw,.95rem);
+  color:rgba(215,226,234,.5);font-weight:300;
+  max-width:420px;line-height:1.6;
+}
+.exp3d-open-btn{
+  padding:.65rem 1.8rem;border-radius:100px;
+  background:linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
+  color:#fff;text-decoration:none;
+  font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  outline:2px solid rgba(255,255,255,.2);outline-offset:-3px;
+  box-shadow:0 4px 4px rgba(181,1,167,.25),inset 4px 4px 12px #7721B1;
+  transition:opacity .2s;cursor:none;display:inline-flex;align-items:center;gap:.5rem;
+  white-space:nowrap;flex-shrink:0;
+}
+.exp3d-open-btn:hover{opacity:.85}
+.exp3d-frame-wrap{
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--surface);
+  width:100%;
+  height:600px;
+  transition:border-color .3s;
+}
+.exp3d-frame-wrap:hover{border-color:rgba(0,229,255,.3)}
+.exp3d-frame-wrap iframe{
+  width:100%;height:100%;
+  border:none;display:block;
+  border-radius:24px;
+}
+/* overlay shown before user clicks — hides the iframe initially */
+.exp3d-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,255,.05) 0%, transparent 70%),
+             var(--surface);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.5rem;cursor:none;border-radius:24px;
+  transition:opacity .4s,pointer-events .4s;
+  z-index:2;
+}
+.exp3d-overlay.hidden{opacity:0;pointer-events:none}
+.exp3d-overlay-icon{
+  font-size:3.5rem;line-height:1;
+  filter:drop-shadow(0 0 20px rgba(0,229,255,.4));
+}
+.exp3d-overlay-title{
+  font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;
+  text-transform:uppercase;letter-spacing:-.01em;
+  background:linear-gradient(180deg,#fff 0%,#BBCCD7 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;
+}
+.exp3d-overlay-sub{
+  font-size:.82rem;color:rgba(215,226,234,.4);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase;
+}
+.exp3d-launch-btn{
+  padding:.8rem 2.5rem;border-radius:100px;
+  border:1px solid rgba(0,229,255,.4);
+  color:var(--cyan);background:rgba(0,229,255,.06);
+  font-size:.85rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+  cursor:none;transition:all .25s;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.exp3d-launch-btn:hover{background:rgba(0,229,255,.12);border-color:var(--cyan)}
+
 /* CONTACT */
 #contact{
   background:var(--surface);
@@ -616,14 +698,17 @@ footer span{color:var(--cyan)}
   }
   .hero-h1{font-size:clamp(12vw,16vw,22vw)}
   #about{padding:5rem 1.5rem}
-  #skills,#services,#projects,#achievements,#contact,#certificates{padding:4rem 1.5rem}
+  #skills,#services,#projects,#achievements,#contact,#certificates,#experience3d{padding:4rem 1.5rem}
   .contact-grid{grid-template-columns:1fr}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .proj-top-row{flex-direction:column}
   .live-btn{align-self:flex-start}
+  .exp3d-frame-wrap{height:380px}
+  .exp3d-header{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:500px){
   .hero-h1{font-size:14vw}
+  .exp3d-frame-wrap{height:280px}
 }
 </style>
 </head>
@@ -724,7 +809,6 @@ footer span{color:var(--cyan)}
 @keyframes fadeIn{
   to{opacity:1}
 }
-/* Glitch flicker on the name */
 @keyframes glitch{
   0%,95%{clip-path:none;transform:translateY(0)}
   96%{clip-path:inset(30% 0 40% 0);transform:translateX(-4px)}
@@ -750,6 +834,7 @@ footer span{color:var(--cyan)}
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience3d">3D</a></li>
     <li><a href="#achievements">Awards</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -764,6 +849,7 @@ footer span{color:var(--cyan)}
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#skills" onclick="closeMob()">Skills</a>
   <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#experience3d" onclick="closeMob()">3D</a>
   <a href="#achievements" onclick="closeMob()">Awards</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
 </div>
@@ -835,7 +921,6 @@ footer span{color:var(--cyan)}
     <h2 class="hero-heading">Gallery</h2>
   </div>
 
-  <!-- Single belt row — scrolls left continuously -->
   <div class="marquee-track left">
     <div class="marquee-row" id="row1">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/softec.jpg" alt="Softect 2026" onerror="this.style.display='none'">
@@ -844,6 +929,7 @@ footer span{color:var(--cyan)}
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/HASSAN-ALI-certificate_page-0001.jpg" alt="Hassan Ali Certificate" onerror="this.style.display='none'">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/fast.jpeg" alt="FAST Event" onerror="this.style.display='none'">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/nasa.jpeg" alt="NASA Hackathon" onerror="this.style.display='none'">
+      <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/FSD.jpeg" alt="FSD Innovation Competeion" onerror="this.style.display='none'">
       <!-- duplicate for seamless loop -->
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/softec.jpg" alt="Softect 2026" onerror="this.style.display='none'">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/act%20in%20space.jpg" alt="ACT in Space Hackathon" onerror="this.style.display='none'">
@@ -851,6 +937,7 @@ footer span{color:var(--cyan)}
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/HASSAN-ALI-certificate_page-0001.jpg" alt="Hassan Ali Certificate" onerror="this.style.display='none'">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/fast.jpeg" alt="FAST Event" onerror="this.style.display='none'">
       <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/nasa.jpeg" alt="NASA Hackathon" onerror="this.style.display='none'">
+      <img class="marquee-img" src="https://raw.githubusercontent.com/hassanaali17/hassanaali17.github.io/main/FSD.jpeg" alt="FSD Innovation Competeion" onerror="this.style.display='none'">
     </div>
   </div>
 </div>
@@ -969,7 +1056,7 @@ footer span{color:var(--cyan)}
   </div>
 </section>
 
-<!-- PROJECTS — clean list, no sticky overlap -->
+<!-- PROJECTS -->
 <section id="projects">
   <div class="projects-inner">
     <div class="sec-eyebrow">// git_log --projects</div>
@@ -1144,6 +1231,38 @@ footer span{color:var(--cyan)}
   </div>
 </section>
 
+<!-- 3D EXPERIENCE -->
+<section id="experience3d">
+  <div class="exp3d-inner">
+    <div class="sec-eyebrow">// render_world_3d()</div>
+    <h2 class="sec-big-title hero-heading fade-up">3D World</h2>
+    <div class="exp3d-header fade-up">
+      <p class="exp3d-desc">Step inside my interactive 3D portfolio experience — an immersive world built with Three.js. Click to explore, or open it full screen.</p>
+      <a href="https://hassan-verse3-d.vercel.app/" target="_blank" class="exp3d-open-btn">
+        <i class="fas fa-expand-alt"></i> Open Full Screen
+      </a>
+    </div>
+    <div class="exp3d-frame-wrap fade-up" id="frame3dWrap">
+      <!-- Click-to-load overlay -->
+      <div class="exp3d-overlay" id="exp3dOverlay" onclick="launch3D()">
+        <div class="exp3d-overlay-icon">🌐</div>
+        <div class="exp3d-overlay-title">3D Portfolio</div>
+        <div class="exp3d-overlay-sub">Interactive Experience</div>
+        <button class="exp3d-launch-btn">
+          <i class="fas fa-play"></i> Enter 3D World
+        </button>
+      </div>
+      <iframe
+        id="iframe3d"
+        src=""
+        title="Hassan Ali Shah — 3D Portfolio Experience"
+        allow="accelerometer; autoplay; fullscreen"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="ach-inner">
@@ -1248,7 +1367,13 @@ function showToast(type,msg){
   setTimeout(()=>t.classList.remove('show'),5000);
 }
 
-/* MARQUEE — infinite belt, no JS needed (handled by CSS) */
+/* 3D EXPERIENCE — lazy load on click */
+function launch3D(){
+  const overlay=document.getElementById('exp3dOverlay');
+  const iframe=document.getElementById('iframe3d');
+  iframe.src='https://hassan-verse3-d.vercel.app/';
+  overlay.classList.add('hidden');
+}
 
 /* CURSOR */
 const cur=document.getElementById('cursor'),curDot=document.getElementById('cursor-dot');
@@ -1268,7 +1393,7 @@ setInterval(()=>{
   }
   px=mx;py=my;
 },16);
-document.querySelectorAll('a,button,.skill-card,.ach-card,.proj-card,.svc-item,.c-link').forEach(el=>{
+document.querySelectorAll('a,button,.skill-card,.ach-card,.proj-card,.svc-item,.c-link,.exp3d-overlay').forEach(el=>{
   el.addEventListener('mouseenter',()=>{hov=true;cur.style.borderBottomColor='#00ff88';cur.style.filter='drop-shadow(0 0 8px rgba(0,255,136,.9))'});
   el.addEventListener('mouseleave',()=>{hov=false;cur.style.borderBottomColor='#00e5ff';cur.style.filter='drop-shadow(0 0 5px rgba(0,229,255,.7))'});
 });
